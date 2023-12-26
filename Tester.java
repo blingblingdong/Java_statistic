@@ -21,11 +21,7 @@ public class Tester {
         
         DescriptiveStatistics stats = new DescriptiveStatistics(data);
         
-        System.out.println("Mean: " + stats.mean());
-        System.out.println("Median: " + stats.median());
-        System.out.println("Standard Deviation: " + stats.standardDeviation());
-        System.out.println("Sample Size: " + stats.sampleSize());
-        System.out.println("Population Variance: " + stats.populationVariance());
-        System.out.println("Population Standard Deviation: " + stats.populationStandardDeviation());
+        System.out.println(stats.information());
+      
     }
 }

@@ -1,0 +1,48 @@
+```{r}
+library(rJava)
+```
+
+```{bash}
+javac DescriptiveStatistics.java
+```
+
+```{r}
+path <- getwd()
+.jinit()
+.jaddClassPath(path)
+```
+
+```{r}
+#創建一個Java List，並且存放1:10double數字
+
+list <- .jnew("java/util/ArrayList")
+
+for(i in 1:10){
+  list$add(i)
+}
+```
+
+```{r}
+
+#將R中的向量轉換成Java中的List
+
+list$add(1)
+list$add(2)
+list$add(3)
+```
+
+```{r}
+list = (1:10)
+```
+
+
+```{r}
+d <- .jnew("DescriptiveStatistics", list)
+```
+
+```{r}
+```
+
+```{r}
+```
+
