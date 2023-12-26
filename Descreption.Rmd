@@ -13,36 +13,24 @@ path <- getwd()
 ```
 
 ```{r}
-#創建一個Java List，並且存放1:10double數字
+#創建一個Array，並且存放1:10double數字
 
-list <- .jnew("java/util/ArrayList")
+Array <- .jarray(as.double(1:10))
 
-for(i in 1:10){
-  list$add(i)
-}
-```
+# 宣告一個DescriptiveStatistics的物件，並且將Array傳入
 
-```{r}
-
-#將R中的向量轉換成Java中的List
-
-list$add(1)
-list$add(2)
-list$add(3)
-```
-
-```{r}
-list = (1:10)
+d <- .jnew("DescriptiveStatistics", Array,"資料1")
 ```
 
 
 ```{r}
-d <- .jnew("DescriptiveStatistics", list)
-```
+d$getData()
 
-```{r}
-```
+# 用ggplot畫出來
 
-```{r}
+library(ggplot2)
+
+ggplot(data.frame(x = 1:10, y = d$getData()), aes(x, y)) + geom_point()
+
 ```
 
