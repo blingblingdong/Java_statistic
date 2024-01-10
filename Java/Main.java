@@ -21,7 +21,6 @@ public class Main {
             case 1:
               System.out.println("Enter the CSV file path: ");
               String filePath = sc.next();
-              ReadFile.readDataToStatsList(filePath, statsList);
               break;
             case 2:
               WriteData.write(statsList);
@@ -33,23 +32,6 @@ public class Main {
             System.out.println(stats.information());
             System.out.println();
         }
-        
-        //將數據寫入csv
-        /*
-        System.out.println("Do you want to write the data to a csv file? (Y/N)");
-        String answer = sc.next();
-        
-        if (answer.equalsIgnoreCase("Y")) {
-            System.out.println("Enter the name of the csv file: ");
-            String fileName = sc.next();
-            File.writeToCSV(statsList, fileName);
-        }
-        */
-        
-        // 進階hypothesisTesting、anova、regression
-        // 先選擇要進行的分析
-        // 再選擇要進行分析的資料
-        
         
         System.out.println("選擇要進行的分析：");
         System.out.println("1. Hypothesis Testing");
