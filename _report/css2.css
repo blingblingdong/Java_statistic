@@ -1,0 +1,128 @@
+.inverse {
+  background-color:#0F2E3D;
+  color: white;
+  font-family: Arial,fantasy;
+}
+
+.bkb{
+  background-color:white;
+  color: #0F2E3D;
+  font-family: Arial,fantasy;
+}
+
+.inverse2 {
+  background-color: #0F2E3D;
+  color: white;
+  font-family: "Arial" ,fantasy;
+}
+
+.tt{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Arial,fantasy;
+}
+
+
+.body {background-color: #92a8d1;}
+
+.pull-left {
+  float: left;
+  width: 47%;
+  text-align: left;
+}
+
+.pull-left2 {
+  float: left;
+  width: 20%;
+}
+
+.pull-right {
+  float: right;
+  width: 47%;
+}
+
+.pull-right2 {
+  float: right;
+  width: 75%;
+}
+
+.pull-right3 {
+  float: right;
+  width: 90%;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.remark-code {
+  font-size: 15px;
+  overflow-y: hidden;
+}
+
+.text-alignl {
+  text-align: left;
+}
+
+.text-alignr{
+  text-align: right;
+}
+.red{
+  color: red;
+}
+.b{
+  color: #272822;
+}
+  
+strong{
+  color: red;
+}
+
+a{
+  color: red;
+  text-decoration-color: transparent;
+}
+
+
+
+.lri p{
+  font-size: 25px;
+}
+
+th {
+  text-align: center !important;
+  background-color: #0F2E3D;
+  color: white;
+}
+
+tr {
+  text-align: center !important;
+}
+table {
+  border-collapse: collapse;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+tr:hover {background-color: #0F2E3D;}
+
+p {
+  font-size: 25px;
+}
+
+
+
+
+a, a > code {
+  color: #0051BA;
+  text-decoration: none!important;
+  font-size: 25px!important;
+  font-weight:bold!important;
+}
+
+a:hover, a:hover > code {
+  color: #d22!important;
+  text-decoration: none!important;
+}
+
