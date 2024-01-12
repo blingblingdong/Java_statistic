@@ -21,11 +21,34 @@ public class Main {
             case 1:
               System.out.println("Enter the CSV file path: ");
               String filePath = sc.next();
+              ReadFile.readDataToStatsList(filePath, statsList);
               break;
             case 2:
-              WriteData.write(statsList);
-              WriteData.writetoCSV("test", statsList);
-              break;
+              while (true) {
+            
+                    System.out.println("數據欄位名: ");
+                    String name = sc.next();
+                  
+                    System.out.println("請問有幾個數據: ");
+                    int n = sc.nextInt();
+                    double[] data = new double[n];
+        
+                    System.out.println("輸入數據: ");
+                    for (int i = 0; i < n; i++) {
+                        data[i] = sc.nextDouble();
+                    }
+        
+                    DescriptiveStatistics stats = new DescriptiveStatistics(data, name);
+                    statsList.add(stats);
+        
+                    System.out.println("Do you want to enter another set of data? (Y/N)");
+                    String answer = sc.next();
+        
+                    if (answer.equalsIgnoreCase("N")) {
+                        break;
+                    }
+                }
+                      break;
         }
         
         for (DescriptiveStatistics stats : statsList) {
@@ -75,6 +98,22 @@ public class Main {
                   System.out.println("至少需要選擇兩組數據進行ANOVA分析");
               }
             case 3:
+              //提供線性回歸的解釋
+              System.out.println("要聽一下線性回歸的概念嗎？(Y/N)");
+              String answer = sc.next();
+              while(answer.equalsIgnoreCase("Y")){
+                System.out.println("概念講解");
+                double[] xData = {1, 2, 3, 4, 5};
+                double[] yData = {2, 5 , 6, 7, 8};
+                LinearRegression reg = new LinearRegression(xData, yData, "線性回歸示範");
+                System.out.println(reg.Explain());
+                System.out.println("要在聽一次嗎？(Y/N)");
+                String answerl1 = sc.next();
+                if (answerl1.equalsIgnoreCase("N")) {
+                    System.out.println("好的，那我們進入實戰環節！");
+                    break;
+                }
+              }
               for (int i = 0; i < statsList.size(); i++) {
                   System.out.println((i + 1) + ". " + statsList.get(i).getName());
               }
@@ -84,7 +123,21 @@ public class Main {
               int index2 = sc.nextInt() - 1;
               String regName = statsList.get(index1).getName() + " vs. " + statsList.get(index2).getName();
               LinearRegression reg = new LinearRegression(statsList.get(index1).getData(), statsList.get(index2).getData(), regName);
-              System.out.println(reg.modelSummary());
+              System.out.println(reg.description());
+              System.out.println(reg.Summary());
+              System.out.println("請問要預測 y(應變數) 值嗎？(Y/N)");
+              String answerl2 = sc.next();
+              while(answerl2.equalsIgnoreCase("Y")){
+                System.out.println("請輸入 y 值：");
+                double x = sc.nextDouble();
+                System.out.println("預測的 x 值為：" + reg.predict(x));
+                System.out.println("要在預測一次嗎？(Y/N)");
+                String answerl3 = sc.next();
+                if (answerl3.equalsIgnoreCase("N")) {
+                    System.out.println("好的，再見！");
+                    break;
+                }
+              }
             }
         sc.close();
     }
