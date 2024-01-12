@@ -6,7 +6,7 @@
 
 1. 網頁(index.html)
 
-http://javadoc/lsyverycute.com
+https://javadoc.lsyverycute.com
 
 2.pdf-word
 
