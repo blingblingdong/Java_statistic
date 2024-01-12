@@ -73,7 +73,7 @@ public class Anova extends DescriptiveStatistics {
      *
      * @return 描述 ANOVA 分析結果的字符串。
      */
-    public String anovaSummary() {
+    public String summary() {
         return "ANOVA 分析 - " + getName() + "\n總體平方和 (SST): " + totalSumOfSquares() +
                "\n組間平方和 (SSB): " + betweenGroupSumOfSquares() +
                "\n組內平方和 (SSW): " + withinGroupSumOfSquares();
@@ -97,4 +97,26 @@ public class Anova extends DescriptiveStatistics {
         return msb / msw; // 計算 F 值
     }
     
+    /**
+     * 提供 ANOVA 分析的基本概念和使用方法的解釋。
+     *
+     * @return ANOVA 分析的基本概念和方法的字符串描述。
+     */
+    public String explain() {
+        return "ANOVA (分析變異) 用於比較三個或更多組的平均數是否有顯著差異。" +
+               "它將總變異分解為組間變異和組內變異，並通過 F 統計量來評估組間變異是否顯著大於組內變異。";
+    }
+
+    /**
+     * 提供 ANOVA 的詳細描述和公式。
+     *
+     * @return ANOVA 的詳細描述和公式的字符串描述。
+     */
+    public String description() {
+        return "ANOVA 通過計算 F 值來測試組間差異的顯著性。" +
+               "F 值是組間均方 (MSB) 和組內均方 (MSW) 的比率，" +
+               "其中 MSB = 組間平方和(SSB) / 組間自由度(dfBetween)，" +
+               "MSW = 組內平方和(SSW) / 組內自由度(dfWithin)。" +
+               "高 F 值通常表明組間變異顯著大於組內變異，從而指示組間存在顯著差異。";
+    }
 }
