@@ -78,9 +78,15 @@ th {
 tr {
   text-align: center !important;
 }
+
 table {
+  display: block;
   border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
 }
+
 
 tr:nth-child(even){background-color: #f2f2f2}
 
