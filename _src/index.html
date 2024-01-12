@@ -1446,7 +1446,7 @@ table {
 border-collapse: collapse;
 }
 tr:nth-child(even){background-color: #f2f2f2}
-tr:hover {background-color: #0F2E3D;}
+tr:hover {background-color: orange;}
 #lawr {
 background-color: red;
 margin-top: 100px;
@@ -2701,7 +2701,7 @@ Group：7</p></p>
 <li><a href="#descriptivestatistics-類別說明" id="toc-descriptivestatistics-類別說明">DescriptiveStatistics 類別說明</a></li>
 <li><a href="#linearregression-類別說明" id="toc-linearregression-類別說明">LinearRegression 類別說明</a></li>
 <li><a href="#anova-類別說明" id="toc-anova-類別說明">Anova 類別說明</a></li>
-<li><a href="#tester" id="toc-tester">Tester</a></li>
+<li><a href="#main-類別說明" id="toc-main-類別說明">Main 類別說明</a></li>
 <li><a href="#example" id="toc-example">Example</a></li>
 <li><a href="#其他資料" id="toc-其他資料">其他資料</a></li>
 </ul>
@@ -3381,7 +3381,33 @@ show
 </details>
 </div>
 <div style="page-break-after: always;"></div>
-<h2 id="tester">Tester</h2>
+<h2 id="main-類別說明">Main 類別說明</h2>
+<p>1.首先，先建立一個<code>ArrayList</code>，用來存放<code>DescriptiveStatistics</code>物件，因為有可能會使用到兩種以上的資料集，所以用<code>ArrayList</code>來存放。</p>
+<p>2.讓使用者選擇數據來源，有三種選擇，分別是CSV、手動輸入、使用範例。</p>
+<ul>
+<li><p>CSV：使用者輸入CSV檔的路徑，程式會自動讀取CSV檔的數據，並將數據存放到<code>ArrayList</code>中。</p></li>
+<li><p>手動輸入：使用者輸入數據欄位名、數據個數、數據，程式會自動將數據存放到<code>ArrayList</code>中。</p></li>
+<li><p>使用範例：程式會自動將範例數據存放到<code>ArrayList</code>中。</p></li>
+</ul>
+<p>3.接著，將<code>ArrayList</code>中的數據進行描述性統計分析，包括平均值、中位數、標準偏差等。(最基礎的DescriptiveStatistics class)</p>
+<p>4.接著，讓使用者選擇要進行的分析，有兩種進階選擇，分別是ANOVA、Regression</p>
+<ul>
+<li><p>ANOVA：讓使用者選擇要進行ANOVA的資料，並計算ANOVA的F值。</p>
+<ol type="1">
+<li><p>先用description()說明ANOVA的概念和公式</p></li>
+<li><p>接著，列出所有的資料集，讓使用者選擇要進行ANOVA的資料集，並計算ANOVA的F值。</p></li>
+<li><p>再來，用summary()提供ANOVA分析的摘要。</p></li>
+<li><p>最後，用explain()提供ANOVA分析的基本概念和使用方法的解釋。</p></li>
+</ol></li>
+<li><p>Regression：讓使用者選擇要進行Regression的資料，並計算Regression的斜率和截距。</p>
+<ol type="1">
+<li><p>先用description()說明Regression的概念和公式</p></li>
+<li><p>接著，列出所有的資料集，讓使用者選擇要進行Regression的資料集，並計算Regression的斜率和截距。</p></li>
+<li><p>再來，用summary()提供Regression分析的摘要。</p></li>
+<li><p>用explain()提供Regression分析的基本概念和使用方法的解釋。</p></li>
+<li><p>最後，使用predict()來預測給定x值的y值。</p></li>
+</ol></li>
+</ul>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
