@@ -78,7 +78,7 @@ public class Main {
         System.out.println("");
         
         System.out.println("選擇要進行的分析：");
-        System.out.println("1. Hypothesis Testing");
+        System.out.println("1. 離開");
         System.out.println("2. ANOVA");
         System.out.println("3. Regression");
         int choice = sc.nextInt();
@@ -88,6 +88,24 @@ public class Main {
             case 1:
               break;
             case 2:
+              //ANOVA-1 解釋
+              System.out.println("要聽一下Anova的概念嗎？(Y/N)");
+              String answera1 = sc.next();
+              while(answera1.equalsIgnoreCase("Y")){
+                System.out.println("概念講解");
+                double[][] dataForAnova = {{1, 2, 3, 4, 5}, {2, 5 , 6, 7, 8}};
+                Anova anova = new Anova(dataForAnova, "ANOVA Test");
+                System.out.println(anova.description());
+                System.out.println("要在聽一次嗎？(Y/N)");
+                String answera2 = sc.next();
+                if (answera2.equalsIgnoreCase("N")) {
+                    System.out.println("好的，那我們進入實戰環節！");
+                    System.out.println("");
+                    break;
+                }
+              }
+              
+              //ANOVA-2 實戰
               System.out.println("請選擇要做ANOVA的資料(輸入對應數字，輸入-1結束)：");
               for (int i = 0; i < statsList.size(); i++) {
                   System.out.println((i + 1) + ". " + statsList.get(i).getName());
@@ -116,6 +134,7 @@ public class Main {
                   Anova anova = new Anova(dataForAnova, "ANOVA Test");
                   System.out.println(anova.summary());
                   System.out.println("F 值: " + anova.calculateFValue());
+                  System.out.println(anova.explain());
               } else {
                   System.out.println("至少需要選擇兩組數據進行ANOVA分析");
               }
