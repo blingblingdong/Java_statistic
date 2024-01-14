@@ -1,54 +1,50 @@
-## 程式設計一期末專案
+## 程式設計一期末報告
 
-題目：Statistic with Java
+### 題目：統計
 
-負責人：董宸賓
+Tester.java 關於使用流程
 
-### 簡介
+DescriptiveStatistics.java統計class
 
-這是一次練習Java物件導向的專案
 
-如主題所述，用Java實作統計的功能
+### Description.Rmd
 
-讓人沮喪的是，受限於實力不足，我並無法做出一個非常完整的系統
-
-其二，教授要求我們使用Design Pattern，但
-
-身為初學者，我也感受得到Design Pattern絕非用14分鐘的「影片」就能學會的
-
-更何況，在這種小型專案中，使用Design Pattern的效果並不明顯
-
-其三，形式大於內容的專案，我並不喜歡
-
-但也因此，我嘗試了許多不同的東西，
-
-例如與R連結，小小開發了一個Web App(https://javashinyapp.fly.dev)
-
-又例如，我用distill製作了一個網頁版的javadoc(https://javadoc.lsyverycute.com)
-
-當然也磨練了java的基本功
-
-無論如何，以下是我的「成品」的藍圖，歡迎參考
-
-### java
-
-主要的程式碼都在裡面
+一些rjava範例
 
 ### src 
 
-javadoc
+javadoc 網頁版
+用javadoc DescriptiveStatistics.java生成
 
-有網頁版與pdf文檔
+### 文檔
 
-### report
+DescriptiveStatistics.java pdf與word版本的doc
 
-xaringan網頁與pdf版的報告
+# DescriptiveStatistics 類別說明
 
-網址：https://java.lsyverycute.com
+**類別名稱：** `DescriptiveStatistics`
 
-### shinyapp
+**類別說明：** 
+這個類別提供了計算數據集描述性統計的方法，包括平均值、中位數、標準偏差等。
 
-網址在前面
+## 建構函數
 
-也提供了容器化的版本
+| 建構函數 | 描述 |
+| --- | --- |
+| `DescriptiveStatistics(double[] data, String name)` | 用指定的數據陣列和數據集名稱初始化 DescriptiveStatistics 實例。 |
 
+## 方法
+
+| 方法名 | 返回類型 | 描述 |
+| --- | --- | --- |
+| `getData()` | `double[]` | 返回當前數據集。 |
+| `getName()` | `String` | 返回數據集的名稱。 |
+| `setData(double[] data)` | `void` | 設置新的數據集。 |
+| `setName(String name)` | `void` | 設置數據集的新名稱。 |
+| `mean()` | `double` | 計算數據集的平均值。 |
+| `median()` | `double` | 計算數據集的中位數。 |
+| `standardDeviation()` | `double` | 計算數據集的標準偏差。 |
+| `sampleSize()` | `int` | 返回數據集的樣本大小。 |
+| `populationVariance()` | `double` | 計算數據集的總體方差。 |
+| `populationStandardDeviation()` | `double` | 計算數據集的總體標準偏差。 |
+| `information()` | `String` | 提供數據集的描述性統計摘要。 |
