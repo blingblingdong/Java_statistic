@@ -10,7 +10,7 @@ https://javadoc.lsyverycute.com
 
 2.pdf-word
 
-javadoc_distill_worddoc.pdf
+word_doc.pdf
 
 3.pdf-distill
 

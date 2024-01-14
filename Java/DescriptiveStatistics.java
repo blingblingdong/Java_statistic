@@ -157,4 +157,9 @@ public class DescriptiveStatistics {
     public String explain(){
         return "以下為您講解公式\n"+ "平均值 = Σx / n\n" + "中位數 = (x[n/2] + x[n/2+1]) / 2\n" + "標準偏差 = √(Σ(x - x平均值)^2 / n)\n"  + "母體方差 = Σ(x - x平均值)^2 / n\n" + "母體標準偏差 = √(Σ(x - x平均值)^2 / n)\n";  
     }
+    
+    
 }
+
+
+

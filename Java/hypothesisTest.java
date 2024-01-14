@@ -1,31 +1,23 @@
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The hypothesisTest class extends descriptiveStat and is designed for
+ * The HypothesisTest class extends DescriptiveStatistics and is designed for
  * hypothesis testing.
  */
 
-public class hypothesisTest {
+public class HypothesisTest extends DescriptiveStatistics{
 	
 
-	    private double a, avg, var;
-	    private int n;
-	    private double hypo, xbar;
-	    private double pValue;
-	    private String direct;
-	    private ArrayList<Double> data;
-	    private String name;
+	private double a; // 顯著性水平 alpha
+    private double hypo; // 假設的平均值
+    private String direct;
 
-	    public hypothesisTest(ArrayList<Double> data, double[] data_array, String name) {
-	        this.data = data;
+
+	    public HypothesisTest(double[] data, String name) {
+	        super(data,name);
 	        this.a = 0.05;
-	        this.var = 0;
-	        this.avg = 0;
-	        this.n = 2;
-	        this.xbar = 0;
-	        this.name = name;
 	    }
 
 	/**
@@ -33,46 +25,25 @@ public class hypothesisTest {
 	 *
 	 * @return The significance level.
 	 */
+	    
 
 	public double getAlpha() {
 		return a;
 	}
-
-	public double getAvg() {
-		return avg;
-	}
-
-	public double getVar() {
-		return var;
-	}
-
-	public double getXbar() {
-		return xbar;
+	
+	public void setDirect(String direct) {
+		this.direct = direct;
 	}
 	
-	public int getNum() {
-		return n;
+	public String getDirect() {
+		return direct;
 	}
+
 
 	public void setAlpha(double alpha) {
 		this.a = alpha;
 	}
 
-	public void setAvg(double avg) {
-		this.avg = avg;
-	}
-
-	public void setVar(double var) {
-		this.var = var;
-	}
-
-	public void setNum(int num) {
-		this.n = num;
-	}
-
-	public void setXbar(double xbar) {
-		this.xbar = xbar;
-	}
 
 	/**
 	 * Step 1: Set the null hypothesis and alternative hypothesis.
@@ -108,65 +79,50 @@ public class hypothesisTest {
 	 * Step 2: Calculate the p-value for the hypothesis test.
 	 */
 
-	public void calculatePValue() {
+	public double p_Population(double populationStandardDeviation) {
+		
+        double diff = super.mean() - this.hypo;
+        double error = populationStandardDeviation / Math.sqrt(super.sampleSize());
+        double z = diff / error;
+        double p = findzTable(z); // 假設 findzTable 方法返回 z 值對應的 p 值
 
-		if (this.n == 0) {
-			double diff = (this.xbar - this.hypo);
-			double error = populationStandardDeviation() / Math.sqrt(data.size());
-			double z = Math.round(100.0 * (diff / error)) / 100.0;
+        if (z > 0) {
+            return (z < 3.59) ? p : 0.4999;
+        } else {
+            return 0.5 - p;
+        }
+    }
 
-			double p = findzTable(z);
-
-			if (0 < z && z < 3.59) {
-				this.pValue = p; // 返回 result，自動拆箱為 double
-			} else if (z > 3.59) {
-				this.pValue = 0.4999; // 直接返回 double 值
-			} else if (z < 0) {
-				this.pValue = 0.5 - p; // 返回 double，自動拆箱為 double
-			}
-
-			System.out.println("可得此情形下，檢定統計量為 " + z);
-
-		} else {
-			double diff = this.xbar - this.hypo;
-			double error = Math.sqrt(this.var) / Math.sqrt(this.n);
-			double z = Math.round(100.0 * (diff / error)) / 100.0;
-
-			double p = findzTable(z);
-
-			if (0 < z && z < 3.59) {
-				this.pValue = p; // 返回 result，自動拆箱為 double
-			} else if (z > 3.59) {
-				this.pValue = 0.4999; // 直接返回 double 值
-			} else if (z < 0) {
-				this.pValue = 0.5 - p; // 返回 double，自動拆箱為 double
-			}
-
-			System.out.println("可得此情形下，檢定統計量為 " + z);
-		}
-	}
 
 	/**
 	 * Step 2: Calculate the p-value for t-distribution.
 	 */
 
-	public double tCalculatePValue() {
+    /**
+     * Calculate the t-value for the hypothesis test using population standard deviation.
+     *
+     * @param xbar The sample mean.
+     * @param sampleSize The size of the sample.
+     * @return The calculated t-value.
+     */
 
-		if (this.n == 0) {
-			double diff = (this.xbar - this.hypo);
-			double error = populationStandardDeviation() / Math.sqrt(data.size());
-			double t = Math.round(100.0 * (diff / error)) / 100.0;
+    /**
+     * Calculate the t-value for the hypothesis test using sample variance.
+     *
+     * @param xbar The sample mean.
+     * @param sampleVariance The variance of the sample.
+     * @param sampleSize The size of the sample.
+     * @return The calculated t-value.
+     */
+    public double t_Sample() {
+    	double diff = super.mean() - this.hypo;
+    	double error = super.standardDeviation() / Math.sqrt(super.sampleSize());
+    	double t = diff / error;
 
-			return t;
 
-		} else {
-			double diff = this.xbar - this.hypo;
-			double error = Math.sqrt(this.var) / Math.sqrt(this.n);
-			double t = Math.round(100.0 * (diff / error)) / 100.0;
+        return t;
+    }
 
-			return t;
-		}
-	}
 
 	/**
 	 * Step 3: Analyze the results based on the calculated t-value or z-value.
@@ -174,22 +130,22 @@ public class hypothesisTest {
 	 * @param t The calculated t-value.
 	 */
 
-	public void analysis(double t) {
+	public void analysis(double p) {
 
 		if (direct.equals("雙尾")) {
 
-			if (pValue > a / 2) {
-				System.out.println("在此情境中，由於p-value("+pValue+")大於alpha("+a+")，可知此資料無法拒絕H0之假設");
-			} else {
-				System.out.println("在此情境中，由於p-value("+pValue+")小於alpha("+a+")，可知此資料無法拒絕H0之假設");
-			}
+			if (p < a / 2) {
+	            System.out.println("在此情境中，由於p-value(" + p + ")小於alpha/2 (" + a / 2 + ")，可知此資料拒絕H0之假設");
+	        } else {
+	            System.out.println("在此情境中，由於p-value(" + p + ")大於或等於alpha/2 (" + a / 2 + ")，可知此資料無法拒絕H0之假設");
+	        }
 
 		} else {
 
-			if (pValue > a) {
-				System.out.println("在此情境中，由於p-value("+pValue+")大於alpha("+a+")，可知此資料無法拒絕H0之假設");
+			if (p > a) {
+				System.out.println("在此情境中，由於p-value("+p+")大於alpha("+a+")，可知此資料無法拒絕H0之假設");
 			} else {
-				System.out.println("在此情境中，由於p-value("+pValue+")小於alpha("+a+")，可知此資料無法拒絕H0之假設");
+				System.out.println("在此情境中，由於p-value("+p+")小於alpha("+a+")，可知此資料無法拒絕H0之假設");
 			}
 		}
 	}
@@ -197,10 +153,12 @@ public class hypothesisTest {
 	public void tAnalysis(double t) {
 
 		this.a = Math.round(this.a * 100.0) / 100.0;
+		
+		int n = super.sampleSize();
 
 		if (direct.equals("右尾")) {
 
-			Double tValue = findtTable(this.a, this.n, false);
+			Double tValue = findtTable(this.a, n, false);
 
 			if (tValue > t) {
 				System.out.println("在此情境中，由於t值("+t+")小於臨界值("+tValue+")，可知此資料無法拒絕H0之假設");
@@ -210,7 +168,7 @@ public class hypothesisTest {
 
 		} else if (direct.equals("左尾")) {
 
-			double tValue = findtTable(this.a, this.n, false);
+			double tValue = findtTable(this.a, n, false);
 			if (tValue < t) {
 				System.out.println("在此情境中，由於t值("+t+")大於臨界值("+tValue+")，可知此資料無法拒絕H0之假設");
 			} else {
@@ -219,7 +177,7 @@ public class hypothesisTest {
 
 		} else if (direct.equals("雙尾")) {
 
-			Double tValue = findtTable(this.a, this.n, true);
+			Double tValue = findtTable(this.a, n, true);
 
 			if (-tValue < t && tValue > t) {
 				System.out.println("在此情境中，由於t值("+t+")落在正負臨界值("+tValue+")之間，可知此資料無法拒絕H0之假設");
@@ -269,69 +227,6 @@ public class hypothesisTest {
 
 	}
 	
-	public double mean() {
-		double sum = 0.0;
-		for (double num : this.data) {
-			sum += num;
-		}
-		return sum / this.data.size();
-	}
-
-	/**
-	 * 計算數據集的標準偏差。
-	 *
-	 * @return 標準偏差
-	 */
-	public double standardDeviation() {
-		double mean = mean();
-		double sumOfSquares = 0.0;
-		for (double num : this.data) {
-			sumOfSquares += Math.pow(num - mean, 2);
-		}
-		return Math.sqrt(sumOfSquares / this.data.size());
-	}
-
-	/**
-	 * 計算數據集的樣本大小。
-	 *
-	 * @return 樣本大小
-	 */
-	public int sampleSize() {
-		return this.data.size();
-	}
-
-	/**
-	 * 計算數據集的母體方差。
-	 *
-	 * @return 母體方差
-	 */
-	public double populationVariance() {
-		double mean = mean();
-		double sumOfSquares = 0.0;
-		for (double num : this.data) {
-			sumOfSquares += Math.pow(num - mean, 2);
-		}
-		return sumOfSquares / this.data.size();
-	}
-
-	/**
-	 * 計算數據集的母體標準偏差。
-	 *
-	 * @return 母體標準偏差
-	 */
-	public double populationStandardDeviation() {
-		return Math.sqrt(populationVariance());
-	}
-
-	/**
-	 * 提供數據集的描述性統計摘要。
-	 *
-	 * @return 描述數據集統計信息的字符串
-	 */
-	public String information() {
-		return "數據名稱: " + this.name + "\n平均值: " + mean() + "\n標準偏差: " + standardDeviation() + "\n樣本大小: " + sampleSize()
-				+ "\n母體方差: " + populationVariance() + "\n母體標準偏差: " + populationStandardDeviation();
-	}
 
 	public double findzTable(double z) {
 
